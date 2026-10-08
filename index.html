@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Kirbyville Kirbys | 4–0</title>
+<style>
+:root{--pink:#ff2b8a;--gold:#f5c34d;--black:#07070a;--panel:#131319;--white:#f8f8fb;--muted:#aaa}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--black);color:var(--white);font-family:Arial,Helvetica,sans-serif}
+nav{position:sticky;top:0;z-index:10;background:#07070af2;border-bottom:1px solid #292932;backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:space-between;padding:12px 5%}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;letter-spacing:1px}.brand img{width:44px;height:44px;object-fit:contain}
+nav a{color:#ddd;text-decoration:none;margin-left:22px;font-weight:700}nav a:hover{color:var(--pink)}
+.hero{min-height:78vh;display:grid;place-items:center;text-align:center;padding:60px 20px;background:radial-gradient(circle at 50% 35%,#35132a 0,#110b12 38%,#07070a 72%)}
+.hero img{width:min(290px,65vw);filter:drop-shadow(0 0 28px #ff2b8a44)}
+.kicker{color:var(--gold);font-weight:900;letter-spacing:3px;margin-top:10px}.hero h1{font-size:clamp(46px,9vw,100px);line-height:.9;margin:10px 0}.hero h1 span{color:var(--pink)}.hero p{color:#ccc;font-size:19px;max-width:650px;margin:18px auto 28px}
+.btn{display:inline-block;background:var(--pink);color:#fff;text-decoration:none;padding:14px 23px;border-radius:8px;font-weight:900;margin:4px}.btn.alt{background:transparent;border:2px solid var(--gold);color:var(--gold)}
+section{max-width:1150px;margin:auto;padding:70px 6%}h2{font-size:42px;margin:0 0 25px}.pink{color:var(--pink)}
+.record{display:grid;grid-template-columns:1fr 1.4fr 1fr;gap:15px}.record .box,.card{background:var(--panel);border:1px solid #30303a;border-radius:16px;padding:24px}.box{text-align:center}.box b{display:block;font-size:48px;color:var(--pink)}.next{border:2px solid var(--pink)!important}.next b{font-size:30px;color:var(--gold)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}.card h3{color:var(--gold);margin-top:0}.card p{color:#c7c7ce;line-height:1.55}
+table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:14px;overflow:hidden}th,td{text-align:left;padding:15px;border-bottom:1px solid #30303a}th{color:var(--gold)}.win{color:#57df78;font-weight:900}
+.jersey{width:100%;border-radius:14px;border:1px solid #333;display:block}
+footer{text-align:center;padding:45px 20px;background:#040406;color:#888}footer strong{color:var(--pink)}
+@media(max-width:700px){nav a{display:none}.record{grid-template-columns:1fr}.hero{min-height:70vh}}
+
+/* Updated 2026 season layout */
+.schedule-wrap{overflow-x:auto;border:1px solid #30303a;border-radius:16px;background:var(--panel)}
+.schedule-table{margin:0;background:transparent;min-width:720px}
+.schedule-table th{background:#19191f;font-size:13px;text-transform:uppercase;letter-spacing:1px}
+.schedule-table td{vertical-align:middle}
+.schedule-table tr:last-child td{border-bottom:0}
+.weeknum{font-weight:900;color:var(--gold);width:90px}
+.opp{font-weight:800;color:#fff}
+.opp small{display:block;color:#888;margin-top:4px;font-weight:600}
+.location{font-weight:800;color:#ccc}.away{color:#aaa}
+.score{font-weight:900;white-space:nowrap}.score.win-score{color:#57df78}.score.upcoming{color:var(--gold)}
+.result-pill{display:inline-block;padding:6px 10px;border-radius:999px;font-size:12px;font-weight:900;letter-spacing:.5px}
+.result-pill.w{background:#173b23;color:#68ee88}.result-pill.next{background:#4a3510;color:#ffd76c;border:0!important}
+.current-row{background:linear-gradient(90deg,#ff2b8a0d,#f5c34d14)}
+.roster-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.position-card{background:var(--panel);border:1px solid #30303a;border-radius:16px;padding:22px}
+.position-card h3{margin:0 0 15px;color:var(--gold);font-size:18px;text-transform:uppercase;letter-spacing:1px}
+.player-list{display:flex;flex-wrap:wrap;gap:9px}
+.player{padding:9px 12px;border-radius:10px;background:#1b1b22;border:1px solid #363640;color:#f4f4f6;font-weight:800}
+.roster-note{color:#999;margin:-10px 0 25px}
+.captain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.captain-card{background:var(--panel);border:1px solid #30303a;border-radius:18px;overflow:hidden;box-shadow:0 10px 30px #0008}.captain-card img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}.captain-info{padding:18px 20px 20px}.captain-info h3{margin:8px 0 4px;font-size:22px;color:#fff}.captain-info p{margin:0;color:#aaa;font-weight:800}.captain-tag{display:inline-block;padding:5px 9px;border-radius:999px;background:#ff2b8a22;border:1px solid var(--pink);color:var(--pink);font-size:11px;font-weight:900;letter-spacing:1px}@media(max-width:850px){.captain-grid{grid-template-columns:1fr 1fr}}@media(max-width:560px){.captain-grid{grid-template-columns:1fr}}</style>
+<link href="manifest.webmanifest" rel="manifest"/><meta content="#ff2b8a" name="theme-color"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/><meta content="Kirbys" name="apple-mobile-web-app-title"/><link href="assets/icon-192.png" rel="apple-touch-icon"/><style>
+html{scroll-padding-top:80px} body{overflow-x:hidden} img{max-width:100%}
+.app-bottom-nav{display:none}.install-wrap{position:fixed;right:18px;bottom:18px;z-index:25}.install-button{background:#ff2b8a;color:white;border:1px solid #ff84bd;border-radius:28px;padding:11px 18px;font-weight:800;box-shadow:0 4px 24px #0008;cursor:pointer}.install-button[hidden]{display:none}
+@media(max-width:760px){nav{padding:9px 4%}nav .brand{font-size:12px}nav a{display:none}.hero{min-height:58vh;padding:42px 18px}.hero h1{font-size:clamp(42px,11vw,70px)}section{padding:42px 5%}h2{font-size:30px}.record{grid-template-columns:1fr!important}.app-bottom-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:30;background:#111015f5;border-top:1px solid #523047;justify-content:space-around;align-items:center;padding:8px 3px max(9px,env(safe-area-inset-bottom));backdrop-filter:blur(12px)}.app-bottom-nav a{color:#ddd;text-decoration:none;font-size:11px;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:58px}.app-bottom-nav a span{font-size:20px}.app-bottom-nav a:focus,.app-bottom-nav a:hover{color:#ff2b8a}body{padding-bottom:78px}.install-wrap{bottom:91px;right:12px}}
+
+/* About the Kirbys */
+.about-layout{display:grid;grid-template-columns:1fr 1.25fr;gap:18px}
+.about-profile{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.about-profile img{width:min(210px,75%);height:auto;object-fit:contain;filter:drop-shadow(0 0 16px #ff2b8a30)}
+.about-profile h3{margin:16px 0 8px;color:var(--gold);letter-spacing:1.4px}
+.about-profile p{max-width:430px;margin:4px auto 16px}
+.about-motto{font-weight:900;letter-spacing:2px;color:var(--pink);font-size:13px}
+.about-details dl{margin:0}.about-details dl>div{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:15px 0;border-bottom:1px solid #30303a}
+.about-details dl>div:last-child{border-bottom:0}.about-details dt{color:#aaa;font-weight:700}.about-details dd{margin:0;text-align:right;font-weight:800;color:#fff}
+.about-swatches{display:inline-flex;vertical-align:middle;gap:4px;margin-right:8px}.about-swatches i{display:block;width:12px;height:12px;border-radius:50%;border:1px solid #777}.swatch-black{background:#07070a}.swatch-pink{background:#ff2b8a}.swatch-gold{background:#f5c34d}
+@media(max-width:760px){.about-layout{grid-template-columns:1fr}.app-bottom-nav a{min-width:0;flex:1;font-size:10px}}
+</style></head>
+<body>
+<nav id="top">
+<div class="brand"><img alt="Kirbyville Kirbys logo" loading="eager" src="assets/logo.png"/><span>KIRBYVILLE KIRBYS</span></div>
+<div><a href="#team">Team</a><a href="#schedule">Schedule</a><a href="#uniforms">Uniforms</a><a href="#captains">Captains</a><a href="#roster">Roster</a><a href="#about">About</a></div>
+</nav>
+<header class="hero">
+<div>
+<img alt="Kirbyville Kirbys" loading="eager" src="assets/logo.png"/>
+<div class="kicker">THE CROWN IS OURS</div>
+<h1>4–0 <span>KIRBYS</span></h1>
+<p>Kirbyville is 4–0 and rolling into a full 14-week season.</p>
+<a class="btn" href="#schedule">NEXT GAME</a><a class="btn alt" href="#roster">ROSTER</a>
+</div>
+</header>
+<section id="team">
+<h2>The <span class="pink">Kirbys</span></h2>
+<div class="record">
+<div class="box"><b>4–0</b>Season Record</div>
+<div class="box next"><b>BLAKERS</b>Next Game · HOME<br/><span style="color:#aaa">Week 5</span></div>
+<div class="box"><b>1st</b>Undefeated Start</div>
+</div>
+<br/>
+<div class="cards">
+<div class="card"><h3>Team Identity</h3><p>Black, hot pink and championship gold. Fast, confident, physical football with the crown on top.</p></div>
+<div class="card"><h3>Next Up</h3><p><strong style="color:#fff">Kirbyville Kirbys vs. Blakers</strong><br/>Home game · Week 5</p></div>
+<div class="card"><h3>Mission</h3><p>Protect the crown. Keep the streak alive. Rule the field.</p></div>
+</div>
+</section>
+<section id="schedule">
+<h2>2026 <span class="pink">Schedule</span></h2>
+<div class="schedule-wrap"><table class="schedule-table"><thead><tr><th>Week</th><th>Opponent</th><th>Location</th><th>Score</th><th>Status</th></tr></thead><tbody><tr><td class="weeknum">Wk 1</td><td class="opp">Moore touchdowns plz<small>Record: 1–3–0</small></td><td class="location">HOME</td><td class="score win-score">151.76–134.30</td><td><span class="result-pill w">WIN</span></td></tr><tr><td class="weeknum">Wk 2</td><td class="opp">Hair Force One<small>Record: 1–3–0</small></td><td class="location">⌂ <span class="away">AWAY</span></td><td class="score win-score">141.28–117.98</td><td><span class="result-pill w">WIN</span></td></tr><tr><td class="weeknum">Wk 3</td><td class="opp">The Capybaras<small>Record: 3–1–0</small></td><td class="location">HOME</td><td class="score win-score">129.10–90.52</td><td><span class="result-pill w">WIN</span></td></tr><tr><td class="weeknum">Wk 4</td><td class="opp">Chainsaw Samurai<small>Record: 2–2–0</small></td><td class="location">⌂ <span class="away">AWAY</span></td><td class="score win-score">136.16–114.90</td><td><span class="result-pill w">WIN</span></td></tr><tr class="current-row"><td class="weeknum">Wk 5</td><td class="opp">Blakers<small>Record: 1–3–0</small></td><td class="location">HOME</td><td class="score upcoming">0.00–0.00</td><td><span class="result-pill next">UP NEXT</span></td></tr><tr><td class="weeknum">Wk 6</td><td class="opp">The Footballers<small>Record: 1–3–0</small></td><td class="location">⌂ <span class="away">AWAY</span></td><td class="score">—</td><td></td></tr><tr><td class="weeknum">Wk 7</td><td class="opp">The Emersonian Institution<small>Record: 3–1–0</small></td><td class="location">⌂ <span class="away">AWAY</span></td><td class="score">—</td><td></td></tr><tr><td class="weeknum">Wk 8</td><td class="opp">Toby or not Toe-b<small>Record: 2–2–0</small></td><td class="location">HOME</td><td class="score">—</td><td></td></tr><tr><td class="weeknum">Wk 9</td><td class="opp">The Classic<small>Record: 2–2–0</small></td><td class="location">⌂ <span class="away">AWAY</span></td><td class="score">—</td><td></td></tr><tr><td class="weeknum">Wk 10</td><td class="opp">the referees :(<small>Record: 2–2–0</small></td><td class="location">HOME</td><td class="score">—</td><td></td></tr><tr><td class="weeknum">Wk 11</td><td class="opp">Football "Football Team" Team<small>Record: 2–2–0</small></td><td class="location">⌂ <span class="away">AWAY</span></td><td class="score">—</td><td></td></tr><tr><td class="weeknum">Wk 12</td><td class="opp">Moore touchdowns plz<small>Record: 1–3–0</small></td><td class="location">⌂ <span class="away">AWAY</span></td><td class="score">—</td><td></td></tr><tr><td class="weeknum">Wk 13</td><td class="opp">Hair Force One<small>Record: 1–3–0</small></td><td class="location">HOME</td><td class="score">—</td><td></td></tr><tr><td class="weeknum">Wk 14</td><td class="opp">The Capybaras<small>Record: 3–1–0</small></td><td class="location">⌂ <span class="away">AWAY</span></td><td class="score">—</td><td></td></tr></tbody></table></div>
+</section>
+<section id="uniforms">
+<h2>Royal <span class="pink">Uniform</span></h2>
+<img alt="Kirbyville Kirbys custom jersey" class="jersey" loading="lazy" src="assets/uniforms.png"/>
+<p style="color:#aaa;text-align:center;margin-top:12px">Official Kirbys black, hot-pink and gold custom jersey design.</p>
+</section>
+<section id="captains"><h2>Team <span class="pink">Captains</span></h2><p class="roster-note">The three captains leading the Kirbys in 2026.</p><div class="captain-grid"><div class="captain-card"><img alt="Derrick Henry captain uniform" loading="lazy" src="assets/captain-henry.png"/><div class="captain-info"><span class="captain-tag">CAPTAIN</span><h3>Derrick Henry</h3><p>RB • Captain</p></div></div><div class="captain-card"><img alt="Bryce Young captain uniform" loading="lazy" src="assets/captain-young.png"/><div class="captain-info"><span class="captain-tag">CAPTAIN</span><h3>Bryce Young</h3><p>QB • Captain</p></div></div><div class="captain-card"><img alt="Jaxon Smith-Njigba captain uniform" loading="lazy" src="assets/captain-jsn.png"/><div class="captain-info"><span class="captain-tag">CAPTAIN</span><h3>Jaxon Smith-Njigba</h3><p>WR • Captain</p></div></div></div></section><section id="roster"><h2>Team <span class="pink">Roster</span></h2><p class="roster-note">Every player is grouped by position — no starter/bench split.</p><div class="roster-grid"><div class="position-card"><h3>QB</h3><div class="player-list"><div class="player">Joe Burrow</div><div class="player">Bryce Young</div></div></div><div class="position-card"><h3>RB</h3><div class="player-list"><div class="player">Derrick Henry</div><div class="player">D’Andre Swift</div><div class="player">Zach Charbonnet</div><div class="player">Chuba Hubbard</div></div></div><div class="position-card"><h3>WR</h3><div class="player-list"><div class="player">Malik Nabers</div><div class="player">Jaxon Smith-Njigba</div><div class="player">Michael Wilson</div><div class="player">Stefon Diggs</div><div class="player">Keon Coleman</div><div class="player">Tyreek Hill</div></div></div><div class="position-card"><h3>TE</h3><div class="player-list"><div class="player">Dalton Kincaid</div><div class="player">Mike Gesicki</div></div></div><div class="position-card"><h3>D/ST</h3><div class="player-list"><div class="player">Raiders D/ST</div><div class="player">Seahawks D/ST</div></div></div></div></section>
+<section id="about" aria-labelledby="about-title">
+<h2 id="about-title">About the <span class="pink">Kirbys</span></h2>
+<p class="roster-note">The story behind the crown.</p>
+<div class="about-layout">
+  <div class="about-profile card">
+    <img src="assets/logo.png" alt="Kirbyville Kirbys team crest" loading="lazy" />
+    <h3>KIRBYVILLE KIRBYS</h3>
+    <p>Founded in 2026, the Kirbyville Kirbys are a fantasy football franchise built around a bold identity: black, hot pink, championship gold, and the crown.</p>
+    <div class="about-motto">THE CROWN IS OURS</div>
+  </div>
+  <div class="about-details card">
+    <h3>Franchise Information</h3>
+    <dl>
+      <div><dt>Founded</dt><dd>2026</dd></div>
+      <div><dt>Founder</dt><dd>Owen Reppert</dd></div>
+      <div><dt>Team Name</dt><dd>Kirbyville Kirbys</dd></div>
+      <div><dt>Sport</dt><dd>Fantasy Football</dd></div>
+      <div><dt>Team Colors</dt><dd><span class="about-swatches" aria-hidden="true"><i class="swatch-black"></i><i class="swatch-pink"></i><i class="swatch-gold"></i></span>Black · Hot Pink · Gold</dd></div>
+      <div><dt>Motto</dt><dd>The Crown Is Ours</dd></div>
+      <div><dt>Inaugural Season</dt><dd>2026</dd></div>
+    </dl>
+  </div>
+</div>
+</section>
+<footer><img alt="" loading="lazy" src="assets/logo.png" style="width:90px"><br/><br/><strong>KIRBYVILLE KIRBYS</strong><br/>4–0 · RULE THE FIELD · 2026</img></footer>
+<div aria-label="App navigation" class="app-bottom-nav"><a href="#top"><span>⌂</span>Home</a><a href="#schedule"><span>▦</span>Games</a><a href="#roster"><span>♙</span>Roster</a><a href="#captains"><span>★</span>Captains</a><a href="#uniforms"><span>♛</span>Uniforms</a><a href="#about"><span>ⓘ</span>About</a></div><div class="install-wrap"><button class="install-button" hidden="" id="installApp">Install Kirbys App</button></div><script>if('serviceWorker' in navigator && location.protocol.startsWith('http')) window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(console.warn));let installPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;document.getElementById('installApp').hidden=false});document.getElementById('installApp').addEventListener('click',async()=>{if(!installPrompt)return;installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;document.getElementById('installApp').hidden=true});window.addEventListener('appinstalled',()=>document.getElementById('installApp').hidden=true);</script></body>
+</html>
